@@ -23,7 +23,7 @@ import com.co.ceiba.parqueadero.repository.IMotoRepository;
 import com.co.ceiba.parqueadero.repository.IParqueaderoRepository;
 
 @RestController
-@RequestMapping("/Registro")
+@RequestMapping("/registro")
 public class IngresoCrud {
 
 	public static final int CARRO = 1;
@@ -48,7 +48,7 @@ public class IngresoCrud {
 
 		Moto moto = new Moto();
 		Carro carro = new Carro();
-		Factura factura =new Factura();
+		Factura factura = new Factura();
 		Optional<Parqueadero> parqueadero;
 		try {
 
@@ -57,7 +57,7 @@ public class IngresoCrud {
 			boolean vingreso = IngresoBusiness.validarDiaIngreso(ingreso.getFechaIngreso(), ingreso.getPlaca());
 
 			parqueadero = parqueaderorepository.findById((long) 23);
-			if(!parqueadero.isPresent()) {
+			if (!parqueadero.isPresent()) {
 				throw new Exception("El parquedero es nulo");
 			}
 			int contadorMotos = parqueadero.get().getContadorMotos();
@@ -81,10 +81,10 @@ public class IngresoCrud {
 						ingreso.setCilindraje(-1);
 
 						ingresorepository.save(ingreso);
-						
+
 						factura.setIdingreso(ingreso);
 						facturarepository.save(factura);
-						
+
 						return " Se registro el ingreso del carro";
 
 					} else {
@@ -111,7 +111,7 @@ public class IngresoCrud {
 					parqueaderorepository.save(parqueadero.get());
 
 					ingresorepository.save(ingreso);
-					
+
 					factura.setIdingreso(ingreso);
 					facturarepository.save(factura);
 

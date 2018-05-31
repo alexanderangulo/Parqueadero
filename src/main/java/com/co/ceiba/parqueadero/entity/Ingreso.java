@@ -27,9 +27,8 @@ public class Ingreso {
 	}
 
 	public Ingreso() {
-		
+
 	}
-	
 
 	public Long getId() {
 		return id;

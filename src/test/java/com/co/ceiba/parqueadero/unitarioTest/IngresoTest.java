@@ -10,41 +10,36 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.co.ceiba.parqueadero.business.IngresoBusiness;
-import com.co.ceiba.parqueadero.entity.Ingreso;
 
 @SpringBootTest
 public class IngresoTest {
 
-
-	
 	@Test
 	public void verificarDiaNoPermitidoPlacaATest() {
-		
-		//Arrange
-		String placa="ABC133";
-		Calendar fechaIngre = new GregorianCalendar(2018,4,27,13,24,56);
-		IngresoBusiness ningreso = new IngresoBusiness();
-		
-		//Act
-		boolean diaNoPermitido = ningreso.validarDiaIngreso(fechaIngre, placa);
 
-		//Assert
+		// Arrange
+		String placa = "ABC133";
+		Calendar fechaIngre = new GregorianCalendar(2018, 4, 27, 13, 24, 56);
+
+		// Act
+		boolean diaNoPermitido = IngresoBusiness.validarDiaIngreso(fechaIngre, placa);
+
+		// Assert
 		assertTrue(diaNoPermitido);
 	}
-	
+
 	@Test
 	public void verificarDiaPermitidoPlacaATest() {
-		//Arrange
-				
-				String placa="BAC133";
-				Calendar fechaIngre = new GregorianCalendar(2018,4,27,13,24,56);
-				IngresoBusiness ningreso = new IngresoBusiness();
-					
-		//Act
-				boolean diaPermitido =ningreso.validarDiaIngreso(fechaIngre, placa);
+		// Arrange
 
-		//Assert
-				Assert.assertFalse(diaPermitido);
-					
+		String placa = "BAC133";
+		Calendar fechaIngre = new GregorianCalendar(2018, 4, 27, 13, 24, 56);
+
+		// Act
+		boolean diaPermitido = IngresoBusiness.validarDiaIngreso(fechaIngre, placa);
+
+		// Assert
+		Assert.assertFalse(diaPermitido);
+
 	}
 }

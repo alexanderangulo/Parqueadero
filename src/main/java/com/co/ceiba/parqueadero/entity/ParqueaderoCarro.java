@@ -11,14 +11,13 @@ public class ParqueaderoCarro {
 	private Long id;
 	private Carro carro;
 	private Date fechaIngreso;
-	
+
 	public ParqueaderoCarro(Long id, Carro carro, Date fechaIngreso) {
 		super();
 		this.id = id;
 		this.carro = carro;
 		this.fechaIngreso = fechaIngreso;
 	}
-	
 
 	public Long getId() {
 		return id;
@@ -43,5 +42,5 @@ public class ParqueaderoCarro {
 	public void setFechaIngreso(Date fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
-		
+
 }

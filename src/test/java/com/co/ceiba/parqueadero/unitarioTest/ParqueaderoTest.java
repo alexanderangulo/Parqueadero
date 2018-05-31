@@ -12,35 +12,33 @@ public class ParqueaderoTest {
 
 	@Test
 	public void DisponibilidadCarroTest() {
-		//Arrange
-		int numMaxCarro=20;
-		ParqueaderoBusiness nparqueadero = new ParqueaderoBusiness();
-		//Act
-		boolean disponible =nparqueadero.disponibilidadParqueaderoCarros(numMaxCarro);
-		
-		//Assert
-		
+		// Arrange
+		int numMaxCarro = 20;
+		// Act
+		boolean disponible = ParqueaderoBusiness.disponibilidadParqueaderoCarros(numMaxCarro);
+
+		// Assert
+
 		assertTrue(disponible);
-				
+
 	}
 
 	@Test
 	public void test() {
-		
+
 	}
-	
+
 	@Test
 	public void DisponibilidadMotoTest() {
-		//Arrange
-		
-		int numMaxMoto=10;
-		ParqueaderoBusiness nparqueadero = new ParqueaderoBusiness();
-		//Act
-		boolean disponible =nparqueadero.disponibilidadParqueaderoMotos(numMaxMoto);
-		
-		//Assert
-		
+		// Arrange
+
+		int numMaxMoto = 10;
+		// Act
+		boolean disponible = ParqueaderoBusiness.disponibilidadParqueaderoMotos(numMaxMoto);
+
+		// Assert
+
 		assertTrue(disponible);
-				
+
 	}
 }

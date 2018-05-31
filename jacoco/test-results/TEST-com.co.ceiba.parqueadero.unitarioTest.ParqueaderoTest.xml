@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.co.ceiba.parqueadero.unitarioTest.ParqueaderoTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2018-05-31T14:13:49" hostname="ALEXANDER-ANGULO" time="0.001">
+<testsuite name="com.co.ceiba.parqueadero.unitarioTest.ParqueaderoTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2018-05-31T14:44:40" hostname="ALEXANDER-ANGULO" time="0.001">
   <properties/>
   <testcase name="DisponibilidadMotoTest" classname="com.co.ceiba.parqueadero.unitarioTest.ParqueaderoTest" time="0.001"/>
   <testcase name="test" classname="com.co.ceiba.parqueadero.unitarioTest.ParqueaderoTest" time="0.0"/>

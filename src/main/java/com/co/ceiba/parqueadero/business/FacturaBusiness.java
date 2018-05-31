@@ -10,7 +10,7 @@ public class FacturaBusiness {
 	public static final int VALORCILINDRAJE=2000;
 	
 
-	public String calcularDuracion(Calendar fechaIngre,Calendar fechaSalida ) {
+	public static String calcularDuracion(Calendar fechaIngre,Calendar fechaSalida ) {
 		
 		long diferenciaMinutos=0;
 		long diferenciaHoras=0;
@@ -29,7 +29,7 @@ public class FacturaBusiness {
 	
 	}
 	
-	public int calculoDcobro(int tipoVehiculo,Calendar fechaIngre,Calendar fechaSalida 
+	public static int calculoDcobro(int tipoVehiculo,Calendar fechaIngre,Calendar fechaSalida 
 			,int cilindraje) {
 		int costo = 0;
 		if(tipoVehiculo==1) {

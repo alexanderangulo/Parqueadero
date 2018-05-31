@@ -12,6 +12,7 @@ import org.springframework.data.repository.Repository;
 import com.co.ceiba.parqueadero.entity.Parqueadero;
 
 public interface IParqueaderoRepository extends CrudRepository<Parqueadero,Long>{
-//	Parqueadero findById(Long id);
+ 
+	
 
 }

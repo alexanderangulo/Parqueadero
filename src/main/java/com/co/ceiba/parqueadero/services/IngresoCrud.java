@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.co.ceiba.parqueadero.business.IngresoBusiness;
 import com.co.ceiba.parqueadero.business.ParqueaderoBusiness;
 import com.co.ceiba.parqueadero.entity.Carro;
-import com.co.ceiba.parqueadero.entity.Factura;
 import com.co.ceiba.parqueadero.entity.Ingreso;
 import com.co.ceiba.parqueadero.entity.Moto;
 import com.co.ceiba.parqueadero.entity.Parqueadero;
@@ -40,6 +39,7 @@ public class IngresoCrud {
 
 	@Autowired
 	public IParqueaderoRepository parqueaderorepository;
+	
 	@Autowired
 	public IFacturaRepository facturarepository;
 
@@ -48,7 +48,6 @@ public class IngresoCrud {
 
 		Moto moto = new Moto();
 		Carro carro = new Carro();
-		Factura factura = new Factura();
 		Optional<Parqueadero> parqueadero;
 		try {
 
@@ -82,9 +81,6 @@ public class IngresoCrud {
 
 						ingresorepository.save(ingreso);
 
-						factura.setIdingreso(ingreso);
-						facturarepository.save(factura);
-
 						return " Se registro el ingreso del carro";
 
 					} else {
@@ -112,9 +108,6 @@ public class IngresoCrud {
 
 					ingresorepository.save(ingreso);
 
-					factura.setIdingreso(ingreso);
-					facturarepository.save(factura);
-
 					return " Se registro el ingreso del moto";
 				} else {
 					return "No hay disponibilidad de paraqueadero para motos";
@@ -125,7 +118,7 @@ public class IngresoCrud {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "errorR";
+		return "error";
 
 	}
 }

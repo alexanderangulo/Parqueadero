@@ -8,6 +8,8 @@ import com.co.ceiba.parqueadero.entity.Carro;
 
 public interface ICarroRepository extends CrudRepository<Carro, Long>{
 	
-	Optional<Carro> findById(Long id);
+	
+
+	Optional<Carro> findByPlaca(String placa);
 
 }

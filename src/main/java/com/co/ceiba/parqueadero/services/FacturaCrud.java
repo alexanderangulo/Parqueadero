@@ -46,7 +46,7 @@ public class FacturaCrud {
 	public IParqueaderoRepository parqueaderorepository;
 
 	@RequestMapping(value = "/salida", consumes = "application/json", method = RequestMethod.POST)
-	public void registrodesalida(@RequestBody String placa) throws Exception {
+	public Factura registrodesalida(@RequestBody String placa) throws Exception {
 
 		Factura factura = new Factura();
 		Optional<Carro> carro;
@@ -91,10 +91,11 @@ public class FacturaCrud {
 			if (!carro.isPresent()) {
 				throw new Exception("carro no encontrado");
 			}
-			
+
 			carrorepository.deleteById(carro.get().getId());
 			ingresorepository.deleteById(ingreso.get().getId());
-		//	facturarepository.deleteById(factura.getId());
+
+			facturarepository.deleteById(factura.getId());
 
 		} else {
 
@@ -108,13 +109,13 @@ public class FacturaCrud {
 			if (!moto.isPresent()) {
 				throw new Exception("carro no encontrado");
 			}
-			
-			
+
 			carrorepository.deleteById(moto.get().getId());
 			ingresorepository.deleteById(ingreso.get().getId());
-		//	facturarepository.deleteById(factura.getId());
-		}
 
+			facturarepository.deleteById(factura.getId());
+		}
+		return factura;
 	}
 
 }

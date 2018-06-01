@@ -2,8 +2,8 @@ package com.co.ceiba.parqueadero.business;
 
 public class ParqueaderoBusiness {
 
-	private static final int numMaxCarro = 30;
-	private static final int numMaxMoto = 10;
+	private static final int DISPONIBILIDADMAXIMACARROS = 30;
+	private static final int DISPONIBILIDADMAXMOTOS = 10;
 
 	public static int contadorDCarros(int contadorCarros) {
 		return ++contadorCarros;
@@ -22,11 +22,11 @@ public class ParqueaderoBusiness {
 	}
 
 	public static boolean disponibilidadParqueaderoCarros(int contadorCarros) {
-		return (contadorCarros <= numMaxCarro);
+		return (contadorCarros <= DISPONIBILIDADMAXIMACARROS);
 	}
 
 	public static boolean disponibilidadParqueaderoMotos(int contadorMotos) {
-		return (contadorMotos <= numMaxMoto);
+		return (contadorMotos <= DISPONIBILIDADMAXMOTOS);
 	}
 
 }

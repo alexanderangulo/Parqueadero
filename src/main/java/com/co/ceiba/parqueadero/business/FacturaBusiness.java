@@ -8,7 +8,10 @@ public class FacturaBusiness {
 	public static final int VALORHORAMOTO = 500;
 	public static final int VALORDIAMOTO = 4000;
 	public static final int VALORCILINDRAJE = 2000;
-
+	public static final int CARRO=1;
+	public static final int MOTO=2;
+	
+	
 	public static String calcularDuracion(Calendar fechaIngre, Calendar fechaSalida) {
 
 		long diferenciaMinutos = 0;
@@ -30,7 +33,7 @@ public class FacturaBusiness {
 
 	public static int calculoDcobro(int tipoVehiculo, Calendar fechaIngre, Calendar fechaSalida, int cilindraje) {
 		int costo = 0;
-		if (tipoVehiculo == 1) {
+		if (tipoVehiculo == CARRO) {
 			String[] resultado = calcularDuracion(fechaIngre, fechaSalida).split(" ");
 			String dia = resultado[0];
 			String hora = resultado[1];
@@ -38,7 +41,7 @@ public class FacturaBusiness {
 			int costoHCarro = Integer.parseInt(hora) * VALORHORACARRO;
 			return costoDCarro + costoHCarro;
 
-		} else if (tipoVehiculo == 2) {
+		} else if (tipoVehiculo == MOTO) {
 
 			String[] resultado = calcularDuracion(fechaIngre, fechaSalida).split(" ");
 			String dia = resultado[0];

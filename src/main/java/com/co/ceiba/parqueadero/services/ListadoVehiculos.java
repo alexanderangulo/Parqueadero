@@ -12,6 +12,7 @@ import com.co.ceiba.parqueadero.entity.Carro;
 import com.co.ceiba.parqueadero.entity.Ingreso;
 import com.co.ceiba.parqueadero.entity.Moto;
 import com.co.ceiba.parqueadero.repository.ICarroRepository;
+import com.co.ceiba.parqueadero.repository.IFacturaRepository;
 import com.co.ceiba.parqueadero.repository.IIngresoRepository;
 import com.co.ceiba.parqueadero.repository.IMotoRepository;
 @RestController
@@ -26,6 +27,9 @@ public class ListadoVehiculos {
 	
 	@Autowired
 	public IIngresoRepository ingresorepository;
+	
+	@Autowired
+	public IFacturaRepository facturarepository;
 	
 	
 	@RequestMapping(value="/carros", consumes="application/json", method=RequestMethod.GET)

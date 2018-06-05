@@ -16,25 +16,22 @@ public class Parqueadero {
 	private int contadorCarros;
 	private int contadorMotos;
 
-				
-	
-	public Parqueadero(Long id, int contadorCarros, int contadorMotos) {
-		this.id = id;
-		this.contadorCarros = contadorCarros;
-		this.contadorMotos = contadorMotos;
-		
-	}
-
 	public Parqueadero() {
 	}
+
+
 
 	public Long getId() {
 		return id;
 	}
 
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+
 
 	public int getContadorCarros() {
 		return contadorCarros;

@@ -22,19 +22,20 @@ public class Factura {
 	public Factura() {
 	}
 
-
+	public Factura(Long id, Ingreso idingreso, Calendar fechaSalida, double costo) {
+		this.id = id;
+		this.idingreso = idingreso;
+		this.fechaSalida = fechaSalida;
+		this.costo = costo;
+	}
 
 	public Ingreso getIdingreso() {
 		return idingreso;
 	}
 
-
-
 	public void setIdingreso(Ingreso idingreso) {
 		this.idingreso = idingreso;
 	}
-
-
 
 	public Long getId() {
 		return id;

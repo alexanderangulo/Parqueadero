@@ -18,26 +18,18 @@ public class ParqueaderoTest {
 		boolean disponible = ParqueaderoBusiness.disponibilidadParqueaderoCarros(numMaxCarro);
 
 		// Assert
-
 		assertTrue(disponible);
-
-	}
-
-	@Test
-	public void test() {
 
 	}
 
 	@Test
 	public void DisponibilidadMotoTest() {
 		// Arrange
-
 		int numMaxMoto = 10;
 		// Act
 		boolean disponible = ParqueaderoBusiness.disponibilidadParqueaderoMotos(numMaxMoto);
 
 		// Assert
-
 		assertTrue(disponible);
 
 	}

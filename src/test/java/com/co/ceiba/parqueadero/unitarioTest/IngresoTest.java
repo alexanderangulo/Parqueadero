@@ -1,6 +1,6 @@
 package com.co.ceiba.parqueadero.unitarioTest;
 
-import static org.junit.Assert.assertTrue;
+
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -15,24 +15,38 @@ import com.co.ceiba.parqueadero.business.IngresoBusiness;
 public class IngresoTest {
 
 	@Test
-	public void verificarDiaNoPermitidoPlacaATest() {
+	public void verificarDiaPermitidoPlacaATest() {
 
 		// Arrange
 		String placa = "ABC133";
+		Calendar fechaIngre = new GregorianCalendar(2018, 4,29, 13, 24, 56);
+
+		// Act
+		boolean diaPermitido = IngresoBusiness.validarDiaIngreso(fechaIngre, placa);
+
+		// Assert
+		assert(diaPermitido);
+	}
+
+	@Test
+	public void verificarDiaNoPermitidoPlacaATest() {
+		// Arrange
+
+		String placa = "ACC133";
 		Calendar fechaIngre = new GregorianCalendar(2018, 4, 27, 13, 24, 56);
 
 		// Act
 		boolean diaNoPermitido = IngresoBusiness.validarDiaIngreso(fechaIngre, placa);
 
 		// Assert
-		assertTrue(diaNoPermitido);
-	}
+		Assert.assertFalse(diaNoPermitido);
 
+	}
 	@Test
-	public void verificarDiaPermitidoPlacaATest() {
+	public void verificarDiaPermitidoPlacaXTest() {
 		// Arrange
 
-		String placa = "BAC133";
+		String placa = "XCC133";
 		Calendar fechaIngre = new GregorianCalendar(2018, 4, 27, 13, 24, 56);
 
 		// Act
@@ -42,4 +56,20 @@ public class IngresoTest {
 		Assert.assertFalse(diaPermitido);
 
 	}
+	@Test
+	public void verificarDiaDomingoPermitidoPlacaXTest() {
+		// Arrange
+
+		String placa = "XCC133";
+		Calendar fechaIngre = new GregorianCalendar(2018, 4, 29, 13, 24, 56);
+
+		// Act
+		boolean diaPermitido = IngresoBusiness.validarDiaIngreso(fechaIngre, placa);
+
+		// Assert
+		Assert.assertFalse(diaPermitido);
+
+	}
+
 }
+

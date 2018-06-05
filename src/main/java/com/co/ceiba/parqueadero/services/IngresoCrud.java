@@ -20,7 +20,7 @@ public class IngresoCrud {
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/addIngreso", method = RequestMethod.POST)
 	public String guardar(@RequestBody Ingreso ingreso) {
-		return ingresoBuss.Registrar(ingreso);
+		return ingresoBuss.registrarIngreso(ingreso);
 	}
 
 }

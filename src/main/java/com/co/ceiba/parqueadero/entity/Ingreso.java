@@ -26,12 +26,8 @@ public class Ingreso {
 		this.cilindraje = cilindraje;
 	}
 
-
-
 	public Ingreso() {
 	}
-
-
 
 	public Long getId() {
 		return id;

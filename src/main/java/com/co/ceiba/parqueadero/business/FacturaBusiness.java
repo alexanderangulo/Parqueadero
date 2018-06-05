@@ -12,18 +12,19 @@ import com.co.ceiba.parqueadero.entity.Parqueadero;
 import com.co.ceiba.parqueadero.repository.IFacturaRepository;
 import com.co.ceiba.parqueadero.repository.IIngresoRepository;
 import com.co.ceiba.parqueadero.repository.IParqueaderoRepository;
+
 @Service
 public class FacturaBusiness {
-	
+
 	public static final int VALORHORACARRO = 1000;
 	public static final int VALORDIACARRO = 8000;
 	public static final int VALORHORAMOTO = 500;
 	public static final int VALORDIAMOTO = 4000;
 	public static final int VALORCILINDRAJE = 2000;
-	
+
 	public static final int CARRO = 1;
 	public static final int MOTO = 2;
-	
+
 	@Autowired
 	public IFacturaRepository facturarepository;
 
@@ -32,7 +33,7 @@ public class FacturaBusiness {
 
 	@Autowired
 	public IParqueaderoRepository parqueaderorepository;
-	
+
 	public static String calcularDuracion(Calendar fechaIngre, Calendar fechaSalida) {
 
 		long diferenciaSegundos = 0;
@@ -79,8 +80,8 @@ public class FacturaBusiness {
 		}
 		return costo;
 	}
-	
-	public  Factura registroFactura(String placa) throws Exception {
+
+	public Factura registroFactura(String placa) throws Exception {
 		Factura factura = new Factura();
 
 		Optional<Parqueadero> parqueadero;
@@ -109,22 +110,19 @@ public class FacturaBusiness {
 			throw new Exception("Parqueadero no encontrado");
 		}
 
-		
-		
-
 		if (tipoVehiculo == CARRO) {
 			int contadorCarros = parqueadero.get().getContadorCarros();
 			contadorCarros = ParqueaderoBusiness.restarCarros(contadorCarros);
 			parqueadero.get().setContadorCarros(contadorCarros);
 
 			parqueaderorepository.save(parqueadero.get());
-			
+
 			ingresorepository.deleteById(ingreso.get().getId());
 
 			facturarepository.deleteById(factura.getId());
 
 		} else {
-			
+
 			int contadorMotos = parqueadero.get().getContadorMotos();
 			contadorMotos = ParqueaderoBusiness.restarMotos(contadorMotos);
 			parqueadero.get().setContadorMotos(contadorMotos);
@@ -136,6 +134,6 @@ public class FacturaBusiness {
 			facturarepository.deleteById(factura.getId());
 		}
 		return factura;
-		
+
 	}
 }

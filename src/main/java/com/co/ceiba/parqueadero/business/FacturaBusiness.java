@@ -37,10 +37,10 @@ public class FacturaBusiness {
 	public static String calcularDuracion(Calendar fechaIngre, Calendar fechaSalida) {
 
 		long diferenciaSegundos = 0;
-		long diferenciaMinutos= 0;
-		long diferenciaHoras= 0;
-		long diferenciaDias= 0;
-		
+		long diferenciaMinutos = 0;
+		long diferenciaHoras = 0;
+		long diferenciaDias = 0;
+
 		diferenciaSegundos = (fechaSalida.get(Calendar.SECOND) - fechaIngre.get(Calendar.SECOND));
 		diferenciaMinutos = (fechaSalida.get(Calendar.MINUTE) - fechaIngre.get(Calendar.MINUTE));
 		diferenciaHoras = (fechaSalida.get(Calendar.HOUR_OF_DAY) - fechaIngre.get(Calendar.HOUR_OF_DAY));
@@ -92,7 +92,7 @@ public class FacturaBusiness {
 	}
 
 	public void actualizarParqueaderoCarros(Optional<Parqueadero> parqueadero) throws Exception {
-		
+
 		if (!parqueadero.isPresent()) {
 			throw new Exception("Parqueadero no encontrado");
 		}
@@ -105,7 +105,7 @@ public class FacturaBusiness {
 	}
 
 	public void actualizarParqueaderoMotos(Optional<Parqueadero> parqueadero) throws Exception {
-		
+
 		if (!parqueadero.isPresent()) {
 			throw new Exception("Parqueadero no encontrado");
 		}
@@ -122,7 +122,9 @@ public class FacturaBusiness {
 		Optional<Parqueadero> parqueadero;
 		parqueadero = parqueaderorepository.findById((long) 1);
 
-		
+		if (!ingreso.isPresent()) {
+			throw new Exception("Placa no encontrada");
+		}
 		int tipoVehiculo = ingreso.get().getTipoVehiculo();
 		if (tipoVehiculo == CARRO) {
 
@@ -154,6 +156,9 @@ public class FacturaBusiness {
 
 		Optional<Ingreso> ingreso = buscarIngresoPorPlaca(placa);
 
+		if (!ingreso.isPresent()) {
+			throw new Exception("Placa no encontrada");
+		}
 		factura.setFechaSalida(Calendar.getInstance());
 
 		int costo = calculoDcobro(ingreso.get().getTipoVehiculo(), ingreso.get().getFechaIngreso(),

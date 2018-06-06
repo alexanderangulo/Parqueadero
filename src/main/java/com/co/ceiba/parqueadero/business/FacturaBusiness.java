@@ -22,6 +22,8 @@ public class FacturaBusiness {
 	public static final int VALORDIAMOTO = 4000;
 	public static final int VALORCILINDRAJE = 2000;
 
+	public static final String PARQUEADERO_NO_ENCONTRADO = "Placa no encontrada";
+	
 	public static final int CARRO = 1;
 	public static final int MOTO = 2;
 
@@ -94,7 +96,7 @@ public class FacturaBusiness {
 	public void actualizarParqueaderoCarros(Optional<Parqueadero> parqueadero) throws Exception {
 
 		if (!parqueadero.isPresent()) {
-			throw new Exception("Parqueadero no encontrado");
+			throw new Exception(PARQUEADERO_NO_ENCONTRADO);
 		}
 
 		int contadorCarros = parqueadero.get().getContadorCarros();
@@ -107,7 +109,7 @@ public class FacturaBusiness {
 	public void actualizarParqueaderoMotos(Optional<Parqueadero> parqueadero) throws Exception {
 
 		if (!parqueadero.isPresent()) {
-			throw new Exception("Parqueadero no encontrado");
+			throw new Exception(PARQUEADERO_NO_ENCONTRADO);
 		}
 
 		int contadorMotos = parqueadero.get().getContadorMotos();
@@ -123,7 +125,7 @@ public class FacturaBusiness {
 		parqueadero = parqueaderorepository.findById((long) 1);
 
 		if (!ingreso.isPresent()) {
-			throw new Exception("Placa no encontrada");
+			throw new Exception(PARQUEADERO_NO_ENCONTRADO);
 		}
 		int tipoVehiculo = ingreso.get().getTipoVehiculo();
 		if (tipoVehiculo == CARRO) {
@@ -146,7 +148,7 @@ public class FacturaBusiness {
 		Optional<Ingreso> ingreso = ingresorepository.findByPlaca(placa);
 
 		if (!ingreso.isPresent()) {
-			throw new Exception("Placa no encontrada");
+			throw new Exception(PARQUEADERO_NO_ENCONTRADO);
 		}
 		return ingreso;
 	}
@@ -157,7 +159,7 @@ public class FacturaBusiness {
 		Optional<Ingreso> ingreso = buscarIngresoPorPlaca(placa);
 
 		if (!ingreso.isPresent()) {
-			throw new Exception("Placa no encontrada");
+			throw new Exception(PARQUEADERO_NO_ENCONTRADO);
 		}
 		factura.setFechaSalida(Calendar.getInstance());
 
@@ -170,7 +172,7 @@ public class FacturaBusiness {
 		facturarepository.save(factura);
 
 		actualizarParqueadero(ingreso, factura);
-
+		
 		return factura;
 
 	}

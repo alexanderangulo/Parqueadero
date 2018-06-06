@@ -36,11 +36,8 @@ public class FacturaBusiness {
 
 	public static String calcularDuracion(Calendar fechaIngre, Calendar fechaSalida) {
 
-		long diferenciaSegundos = 0;
-		long diferenciaMinutos = 0;
-		long diferenciaHoras = 0;
-		long diferenciaDias = 0;
-
+		long diferenciaSegundos,diferenciaMinutos,diferenciaHoras,diferenciaDias = 0;
+		
 		diferenciaSegundos = (fechaSalida.get(Calendar.SECOND) - fechaIngre.get(Calendar.SECOND));
 		diferenciaMinutos = (fechaSalida.get(Calendar.MINUTE) - fechaIngre.get(Calendar.MINUTE));
 		diferenciaHoras = (fechaSalida.get(Calendar.HOUR_OF_DAY) - fechaIngre.get(Calendar.HOUR_OF_DAY));
@@ -56,83 +53,110 @@ public class FacturaBusiness {
 		return (diferenciaDias + " " + diferenciaHoras);
 	}
 
+	public static int costoDeParqueaderoCarros(Calendar fechaIngre, Calendar fechaSalida, int cilindraje) {
+
+		String[] resultado = calcularDuracion(fechaIngre, fechaSalida).split(" ");
+		String dia = resultado[0];
+		String hora = resultado[1];
+		int costoDCarro = Integer.parseInt(dia) * VALORDIACARRO;
+		int costoHCarro = Integer.parseInt(hora) * VALORHORACARRO;
+		return costoDCarro + costoHCarro;
+	}
+
+	public static int costoDeParqueaderoMotos(Calendar fechaIngre, Calendar fechaSalida, int cilindraje) {
+		String[] resultado = calcularDuracion(fechaIngre, fechaSalida).split(" ");
+		String dia = resultado[0];
+		String hora = resultado[1];
+		int costoDMoto = Integer.parseInt(dia) * VALORDIAMOTO;
+		int costoHMoto = Integer.parseInt(hora) * VALORHORAMOTO;
+		if (cilindraje <= 500) {
+			return costoDMoto + costoHMoto;
+		}
+		return costoDMoto + costoHMoto + VALORCILINDRAJE;
+	}
+
 	public static int calculoDcobro(int tipoVehiculo, Calendar fechaIngre, Calendar fechaSalida, int cilindraje) {
 		int costo = 0;
 		if (tipoVehiculo == CARRO) {
-			String[] resultado = calcularDuracion(fechaIngre, fechaSalida).split(" ");
-			String dia = resultado[0];
-			String hora = resultado[1];
-			int costoDCarro = Integer.parseInt(dia) * VALORDIACARRO;
-			int costoHCarro = Integer.parseInt(hora) * VALORHORACARRO;
-			return costoDCarro + costoHCarro;
+
+			return costoDeParqueaderoCarros(fechaIngre, fechaSalida, cilindraje);
 
 		} else if (tipoVehiculo == MOTO) {
 
-			String[] resultado = calcularDuracion(fechaIngre, fechaSalida).split(" ");
-			String dia = resultado[0];
-			String hora = resultado[1];
-			int costoDMoto = Integer.parseInt(dia) * VALORDIAMOTO;
-			int costoHMoto = Integer.parseInt(hora) * VALORHORAMOTO;
-			if (cilindraje <= 500) {
-				return costoDMoto + costoHMoto;
-			}
-			return costoDMoto + costoHMoto + VALORCILINDRAJE;
+			return costoDeParqueaderoMotos(fechaIngre, fechaSalida, cilindraje);
 		}
 		return costo;
 	}
 
-	public Factura registroFactura(String placa) throws Exception {
-		Factura factura = new Factura();
+	public void actualizarParqueaderoCarros(Optional<Parqueadero> parqueadero) {
+
+		int contadorCarros = parqueadero.get().getContadorCarros();
+		contadorCarros = ParqueaderoBusiness.restarCarros(contadorCarros);
+		parqueadero.get().setContadorCarros(contadorCarros);
+
+		parqueaderorepository.save(parqueadero.get());
+	}
+
+	public void actualizarParqueaderoMotos(Optional<Parqueadero> parqueadero) {
+
+		int contadorMotos = parqueadero.get().getContadorMotos();
+		contadorMotos = ParqueaderoBusiness.restarMotos(contadorMotos);
+		parqueadero.get().setContadorMotos(contadorMotos);
+
+		parqueaderorepository.save(parqueadero.get());
+	}
+
+	public void actualizarParqueadero(Optional<Ingreso> ingreso, Factura factura) throws Exception {
 
 		Optional<Parqueadero> parqueadero;
-
-		Optional<Ingreso> ingreso = ingresorepository.findByPlaca(placa);
-
-		if (!ingreso.isPresent()) {
-			throw new Exception("Placa no encontrada");
-		}
-
-		factura.setFechaSalida(Calendar.getInstance());
-
-		int tipoVehiculo = ingreso.get().getTipoVehiculo();
-
-		int costo = FacturaBusiness.calculoDcobro(ingreso.get().getTipoVehiculo(), ingreso.get().getFechaIngreso(),
-				factura.getFechaSalida(), ingreso.get().getCilindraje());
-
-		factura.setCosto(costo);
-
-		factura.setIdingreso(ingreso.get());
-		facturarepository.save(factura);
-
 		parqueadero = parqueaderorepository.findById((long) 1);
 
 		if (!parqueadero.isPresent()) {
 			throw new Exception("Parqueadero no encontrado");
 		}
-
+		int tipoVehiculo = ingreso.get().getTipoVehiculo();
 		if (tipoVehiculo == CARRO) {
-			int contadorCarros = parqueadero.get().getContadorCarros();
-			contadorCarros = ParqueaderoBusiness.restarCarros(contadorCarros);
-			parqueadero.get().setContadorCarros(contadorCarros);
 
-			parqueaderorepository.save(parqueadero.get());
+			actualizarParqueaderoCarros(parqueadero);
 
 			ingresorepository.deleteById(ingreso.get().getId());
-
 			facturarepository.deleteById(factura.getId());
 
 		} else {
 
-			int contadorMotos = parqueadero.get().getContadorMotos();
-			contadorMotos = ParqueaderoBusiness.restarMotos(contadorMotos);
-			parqueadero.get().setContadorMotos(contadorMotos);
-
-			parqueaderorepository.save(parqueadero.get());
+			actualizarParqueaderoMotos(parqueadero);
 
 			ingresorepository.deleteById(ingreso.get().getId());
-
 			facturarepository.deleteById(factura.getId());
 		}
+	}
+
+	public Optional<Ingreso> buscarIngresoPorPlaca(String placa) throws Exception {
+		Optional<Ingreso> ingreso = ingresorepository.findByPlaca(placa);
+
+		if (!ingreso.isPresent()) {
+			throw new Exception("Placa no encontrada");
+		}
+		return ingreso;
+	}
+
+	public Factura registroFactura(String placa) throws Exception {
+		Factura factura = new Factura();
+
+		Optional<Ingreso> ingreso = buscarIngresoPorPlaca(placa);
+
+		factura.setFechaSalida(Calendar.getInstance());
+
+		int costo = calculoDcobro(ingreso.get().getTipoVehiculo(), ingreso.get().getFechaIngreso(),
+				factura.getFechaSalida(), ingreso.get().getCilindraje());
+
+		factura.setCosto(costo);
+		factura.setIdingreso(ingreso.get());
+
+		facturarepository.save(factura);
+
+		actualizarParqueadero(ingreso, factura);
+
 		return factura;
 
 	}

@@ -26,6 +26,7 @@ public class IngresoBusiness {
 	}
 
 	public void actualizarParqueaderoCarros(int contadorCarros, Optional<Parqueadero> parqueadero) throws Exception {
+		
 		if (!parqueadero.isPresent()) {
 			throw new Exception("El parquedero es nulo");
 		}

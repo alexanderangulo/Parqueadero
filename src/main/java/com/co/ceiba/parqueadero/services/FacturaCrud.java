@@ -17,7 +17,7 @@ public class FacturaCrud {
 
 	@Autowired
 	public FacturaBusiness facturaBuss;
-	//@CrossOrigin(origins = "*")
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/salida", method = RequestMethod.POST)
 	public Factura salidaregistro(@RequestBody String placa) throws Exception {
 		return facturaBuss.registroFactura(placa);

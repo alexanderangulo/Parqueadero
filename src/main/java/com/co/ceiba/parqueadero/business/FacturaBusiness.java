@@ -36,7 +36,10 @@ public class FacturaBusiness {
 
 	public static String calcularDuracion(Calendar fechaIngre, Calendar fechaSalida) {
 
-		long diferenciaSegundos,diferenciaMinutos,diferenciaHoras,diferenciaDias = 0;
+		long diferenciaSegundos = 0;
+		long diferenciaMinutos= 0;
+		long diferenciaHoras= 0;
+		long diferenciaDias= 0;
 		
 		diferenciaSegundos = (fechaSalida.get(Calendar.SECOND) - fechaIngre.get(Calendar.SECOND));
 		diferenciaMinutos = (fechaSalida.get(Calendar.MINUTE) - fechaIngre.get(Calendar.MINUTE));
@@ -53,7 +56,7 @@ public class FacturaBusiness {
 		return (diferenciaDias + " " + diferenciaHoras);
 	}
 
-	public static int costoDeParqueaderoCarros(Calendar fechaIngre, Calendar fechaSalida, int cilindraje) {
+	public static int costoDeParqueaderoCarros(Calendar fechaIngre, Calendar fechaSalida) {
 
 		String[] resultado = calcularDuracion(fechaIngre, fechaSalida).split(" ");
 		String dia = resultado[0];
@@ -79,7 +82,7 @@ public class FacturaBusiness {
 		int costo = 0;
 		if (tipoVehiculo == CARRO) {
 
-			return costoDeParqueaderoCarros(fechaIngre, fechaSalida, cilindraje);
+			return costoDeParqueaderoCarros(fechaIngre, fechaSalida);
 
 		} else if (tipoVehiculo == MOTO) {
 
@@ -88,7 +91,11 @@ public class FacturaBusiness {
 		return costo;
 	}
 
-	public void actualizarParqueaderoCarros(Optional<Parqueadero> parqueadero) {
+	public void actualizarParqueaderoCarros(Optional<Parqueadero> parqueadero) throws Exception {
+		
+		if (!parqueadero.isPresent()) {
+			throw new Exception("Parqueadero no encontrado");
+		}
 
 		int contadorCarros = parqueadero.get().getContadorCarros();
 		contadorCarros = ParqueaderoBusiness.restarCarros(contadorCarros);
@@ -97,7 +104,11 @@ public class FacturaBusiness {
 		parqueaderorepository.save(parqueadero.get());
 	}
 
-	public void actualizarParqueaderoMotos(Optional<Parqueadero> parqueadero) {
+	public void actualizarParqueaderoMotos(Optional<Parqueadero> parqueadero) throws Exception {
+		
+		if (!parqueadero.isPresent()) {
+			throw new Exception("Parqueadero no encontrado");
+		}
 
 		int contadorMotos = parqueadero.get().getContadorMotos();
 		contadorMotos = ParqueaderoBusiness.restarMotos(contadorMotos);
@@ -111,9 +122,7 @@ public class FacturaBusiness {
 		Optional<Parqueadero> parqueadero;
 		parqueadero = parqueaderorepository.findById((long) 1);
 
-		if (!parqueadero.isPresent()) {
-			throw new Exception("Parqueadero no encontrado");
-		}
+		
 		int tipoVehiculo = ingreso.get().getTipoVehiculo();
 		if (tipoVehiculo == CARRO) {
 

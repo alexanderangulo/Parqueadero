@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.co.ceiba.parqueadero.unitarioTest.IngresoTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2018-06-05T16:31:34" hostname="ALEXANDER-ANGULO" time="0.002">
+<testsuite name="com.co.ceiba.parqueadero.unitarioTest.IngresoTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2018-06-07T20:27:53" hostname="ALEXANDER-ANGULO" time="0.001">
   <properties/>
-  <testcase name="verificarDiaNoPermitidoPlacaATest" classname="com.co.ceiba.parqueadero.unitarioTest.IngresoTest" time="0.001"/>
-  <testcase name="verificarDiaPermitidoPlacaATest" classname="com.co.ceiba.parqueadero.unitarioTest.IngresoTest" time="0.001"/>
+  <testcase name="verificarDiaNoPermitidoPlacaATest" classname="com.co.ceiba.parqueadero.unitarioTest.IngresoTest" time="0.0"/>
+  <testcase name="verificarDiaPermitidoPlacaATest" classname="com.co.ceiba.parqueadero.unitarioTest.IngresoTest" time="0.0"/>
+  <testcase name="verificarDiaPermitidoPlacaXTest" classname="com.co.ceiba.parqueadero.unitarioTest.IngresoTest" time="0.0"/>
+  <testcase name="verificarDiaDomingoPermitidoPlacaXTest" classname="com.co.ceiba.parqueadero.unitarioTest.IngresoTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

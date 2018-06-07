@@ -14,6 +14,8 @@ import com.co.ceiba.parqueadero.repository.IParqueaderoRepository;
 public class IngresoBusiness {
 
 	public static final int CARRO = 1;
+	
+	public static final String PARQUEADERO_NO_ENCONTRADO = "Placa no encontrada";
 
 	@Autowired
 	public IParqueaderoRepository parqueaderorepository;
@@ -28,7 +30,7 @@ public class IngresoBusiness {
 	public void actualizarParqueaderoCarros(int contadorCarros, Optional<Parqueadero> parqueadero) throws Exception {
 		
 		if (!parqueadero.isPresent()) {
-			throw new Exception("El parquedero es nulo");
+			throw new Exception(PARQUEADERO_NO_ENCONTRADO);
 		}
 		contadorCarros = ParqueaderoBusiness.contadorDCarros(contadorCarros);
 		parqueadero.get().setContadorCarros(contadorCarros);
@@ -38,7 +40,7 @@ public class IngresoBusiness {
 
 	public void actualizarParqueaderoMotos(int contadorMotos, Optional<Parqueadero> parqueadero) throws Exception {
 		if (!parqueadero.isPresent()) {
-			throw new Exception("El parquedero es nulo");
+			throw new Exception(PARQUEADERO_NO_ENCONTRADO);
 		}
 		contadorMotos = ParqueaderoBusiness.contadorDMotos(contadorMotos);
 		parqueadero.get().setContadorMotos(contadorMotos);
@@ -48,7 +50,7 @@ public class IngresoBusiness {
 
 	public String registroCarro(Optional<Parqueadero> parqueadero, Ingreso ingreso) throws Exception {
 		if (!parqueadero.isPresent()) {
-			throw new Exception("El parquedero es nulo");
+			throw new Exception(PARQUEADERO_NO_ENCONTRADO);
 		}
 		int contadorCarros = parqueadero.get().getContadorCarros();
 		boolean disponibilidad = ParqueaderoBusiness.disponibilidadParqueaderoCarros(contadorCarros);
@@ -68,7 +70,7 @@ public class IngresoBusiness {
 
 	public String registroMoto(Optional<Parqueadero> parqueadero, Ingreso ingreso) throws Exception {
 		if (!parqueadero.isPresent()) {
-			throw new Exception("El parquedero es nulo");
+			throw new Exception(PARQUEADERO_NO_ENCONTRADO);
 		}
 		int contadorMotos = parqueadero.get().getContadorMotos();
 		boolean disponibilidad = ParqueaderoBusiness.disponibilidadParqueaderoMotos(contadorMotos);

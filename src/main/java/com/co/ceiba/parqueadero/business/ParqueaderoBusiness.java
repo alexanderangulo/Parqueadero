@@ -2,7 +2,7 @@ package com.co.ceiba.parqueadero.business;
 
 public class ParqueaderoBusiness {
 
-	private static final int DISPONIBILIDADMAXIMACARROS = 30;
+	private static final int DISPONIBILIDADMAXIMACARROS = 20;
 	private static final int DISPONIBILIDADMAXMOTOS = 10;
 
 	public static int contadorDCarros(int contadorCarros) {

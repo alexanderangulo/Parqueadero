@@ -1,5 +1,6 @@
 package com.co.ceiba.parqueadero.unitarioTest;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -21,6 +22,17 @@ public class ParqueaderoTest {
 		assertTrue(disponible);
 
 	}
+	@Test
+	public void noDisponibilidadCarroTest() {
+		// Arrange
+		int numMaxCarro = 21;
+		// Act
+		boolean disponible = ParqueaderoBusiness.disponibilidadParqueaderoCarros(numMaxCarro);
+
+		// Assert
+		assertFalse(disponible);
+
+	}
 
 	@Test
 	public void DisponibilidadMotoTest() {
@@ -31,6 +43,17 @@ public class ParqueaderoTest {
 
 		// Assert
 		assertTrue(disponible);
+
+	}
+	@Test
+	public void noDisponibilidadMotoTest() {
+		// Arrange
+		int numMaxMoto = 11;
+		// Act
+		boolean disponible = ParqueaderoBusiness.disponibilidadParqueaderoMotos(numMaxMoto);
+
+		// Assert
+		assertFalse(disponible);
 
 	}
 }

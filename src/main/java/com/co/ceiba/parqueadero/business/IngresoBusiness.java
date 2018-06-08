@@ -11,6 +11,7 @@ import com.co.ceiba.parqueadero.entity.Ingreso;
 import com.co.ceiba.parqueadero.entity.Parqueadero;
 import com.co.ceiba.parqueadero.repository.IIngresoRepository;
 import com.co.ceiba.parqueadero.repository.IParqueaderoRepository;
+import com.co.ceiba.parqueadero.utility.ExcepcionesParqueadero;
 
 @Service
 public class IngresoBusiness {
@@ -31,10 +32,10 @@ public class IngresoBusiness {
 				|| fechaIngre.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY)) && (placa.charAt(0) == "A".charAt(0)));
 	}
 
-	public void actualizarParqueaderoCarros(int contadorCarros, Optional<Parqueadero> parqueadero) throws Exception {
+	public void actualizarParqueaderoCarros(int contadorCarros, Optional<Parqueadero> parqueadero) throws ExcepcionesParqueadero {
 		
 		if (!parqueadero.isPresent()) {
-			throw new Exception(PARQUEADERO_NO_ENCONTRADO);
+			throw new ExcepcionesParqueadero(PARQUEADERO_NO_ENCONTRADO);
 		}
 		contadorCarros = ParqueaderoBusiness.contadorDCarros(contadorCarros);
 		parqueadero.get().setContadorCarros(contadorCarros);
@@ -42,9 +43,9 @@ public class IngresoBusiness {
 		parqueaderorepository.save(parqueadero.get());
 	}
 
-	public void actualizarParqueaderoMotos(int contadorMotos, Optional<Parqueadero> parqueadero) throws Exception {
+	public void actualizarParqueaderoMotos(int contadorMotos, Optional<Parqueadero> parqueadero) throws ExcepcionesParqueadero {
 		if (!parqueadero.isPresent()) {
-			throw new Exception(PARQUEADERO_NO_ENCONTRADO);
+			throw new ExcepcionesParqueadero(PARQUEADERO_NO_ENCONTRADO);
 		}
 		contadorMotos = ParqueaderoBusiness.contadorDMotos(contadorMotos);
 		parqueadero.get().setContadorMotos(contadorMotos);
@@ -54,7 +55,7 @@ public class IngresoBusiness {
 
 	public String registroCarro(Optional<Parqueadero> parqueadero, Ingreso ingreso) throws Exception {
 		if (!parqueadero.isPresent()) {
-			throw new Exception(PARQUEADERO_NO_ENCONTRADO);
+			throw new ExcepcionesParqueadero(PARQUEADERO_NO_ENCONTRADO);
 		}
 		int contadorCarros = parqueadero.get().getContadorCarros();
 		boolean disponibilidad = ParqueaderoBusiness.disponibilidadParqueaderoCarros(contadorCarros);
@@ -74,7 +75,7 @@ public class IngresoBusiness {
 
 	public String registroMoto(Optional<Parqueadero> parqueadero, Ingreso ingreso) throws Exception {
 		if (!parqueadero.isPresent()) {
-			throw new Exception(PARQUEADERO_NO_ENCONTRADO);
+			throw new ExcepcionesParqueadero(PARQUEADERO_NO_ENCONTRADO);
 		}
 		int contadorMotos = parqueadero.get().getContadorMotos();
 		boolean disponibilidad = ParqueaderoBusiness.disponibilidadParqueaderoMotos(contadorMotos);

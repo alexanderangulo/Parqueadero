@@ -33,9 +33,6 @@ public class Ingreso {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Calendar getFechaIngreso() {
 		return fechaIngreso;

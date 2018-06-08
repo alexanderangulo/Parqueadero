@@ -103,7 +103,7 @@ public class IngresoBusiness {
 			parqueadero = parqueaderorepository.findById((long) 1);
 			
 			
-			if (tipo == CARRO) {
+			if (tipo == CARRO ) {
 				if (!vingreso) {
 					return registroCarro(parqueadero, ingreso);
 				} else {

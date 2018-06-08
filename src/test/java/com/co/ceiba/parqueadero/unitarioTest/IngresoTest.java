@@ -2,10 +2,12 @@ package com.co.ceiba.parqueadero.unitarioTest;
 
 
 
+import static org.junit.Assert.*;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import org.junit.Assert;
+
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -25,7 +27,7 @@ public class IngresoTest {
 		boolean diaPermitido = IngresoBusiness.validarDiaIngreso(fechaIngre, placa);
 
 		// Assert
-		assert(diaPermitido);
+		assertTrue(diaPermitido);
 	}
 
 	@Test
@@ -39,7 +41,7 @@ public class IngresoTest {
 		boolean diaNoPermitido = IngresoBusiness.validarDiaIngreso(fechaIngre, placa);
 
 		// Assert
-		Assert.assertFalse(diaNoPermitido);
+		assertFalse(diaNoPermitido);
 
 	}
 	@Test
@@ -53,7 +55,7 @@ public class IngresoTest {
 		boolean diaPermitido = IngresoBusiness.validarDiaIngreso(fechaIngre, placa);
 
 		// Assert
-		Assert.assertFalse(diaPermitido);
+		assertFalse(diaPermitido);
 
 	}
 	@Test
@@ -67,7 +69,7 @@ public class IngresoTest {
 		boolean diaPermitido = IngresoBusiness.validarDiaIngreso(fechaIngre, placa);
 
 		// Assert
-		Assert.assertFalse(diaPermitido);
+		assertFalse(diaPermitido);
 
 	}
 

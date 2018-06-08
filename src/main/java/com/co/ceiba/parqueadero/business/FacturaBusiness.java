@@ -12,6 +12,7 @@ import com.co.ceiba.parqueadero.entity.Parqueadero;
 import com.co.ceiba.parqueadero.repository.IFacturaRepository;
 import com.co.ceiba.parqueadero.repository.IIngresoRepository;
 import com.co.ceiba.parqueadero.repository.IParqueaderoRepository;
+import com.co.ceiba.parqueadero.utility.ExcepcionesParqueadero;
 
 @Service
 public class FacturaBusiness {
@@ -93,10 +94,10 @@ public class FacturaBusiness {
 		return costo;
 	}
 
-	public void actualizarParqueaderoCarros(Optional<Parqueadero> parqueadero) throws Exception {
+	public void actualizarParqueaderoCarros(Optional<Parqueadero> parqueadero) throws ExcepcionesParqueadero {
 
 		if (!parqueadero.isPresent()) {
-			throw new Exception(PARQUEADERO_NO_ENCONTRADO);
+			throw new ExcepcionesParqueadero(PARQUEADERO_NO_ENCONTRADO);
 		}
 
 		int contadorCarros = parqueadero.get().getContadorCarros();
@@ -106,10 +107,10 @@ public class FacturaBusiness {
 		parqueaderorepository.save(parqueadero.get());
 	}
 
-	public void actualizarParqueaderoMotos(Optional<Parqueadero> parqueadero) throws Exception {
+	public void actualizarParqueaderoMotos(Optional<Parqueadero> parqueadero) throws ExcepcionesParqueadero {
 
 		if (!parqueadero.isPresent()) {
-			throw new Exception(PARQUEADERO_NO_ENCONTRADO);
+			throw new ExcepcionesParqueadero(PARQUEADERO_NO_ENCONTRADO);
 		}
 
 		int contadorMotos = parqueadero.get().getContadorMotos();

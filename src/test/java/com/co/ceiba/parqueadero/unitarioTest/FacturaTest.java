@@ -1,9 +1,11 @@
 package com.co.ceiba.parqueadero.unitarioTest;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import org.junit.Assert;
+import org.junit.Assert.*;
 import org.junit.Test;
 
 import com.co.ceiba.parqueadero.business.FacturaBusiness;
@@ -19,7 +21,7 @@ public class FacturaTest {
 		// Act
 		String duracion = FacturaBusiness.calcularDuracion(fechaIngre, fechaSalida);
 		// Assert
-		Assert.assertEquals("1 3", duracion);
+		assertEquals("1 3", duracion);
 	}
 
 	@Test
@@ -35,7 +37,7 @@ public class FacturaTest {
 		int costo = FacturaBusiness.calculoDcobro(tipoVehiculo, fechaIngre, fechaSalida, cilindraje);
 
 		// Assert
-		Assert.assertEquals(11000, costo);
+		assertEquals(11000, costo);
 	}
 
 	@Test
@@ -51,7 +53,7 @@ public class FacturaTest {
 		int costo = FacturaBusiness.calculoDcobro(tipoVehiculo, fechaIngre, fechaSalida, cilindraje);
 
 		// Assert
-		Assert.assertEquals(5500, costo);
+		assertEquals(5500, costo);
 	}
 
 	@Test
@@ -67,7 +69,7 @@ public class FacturaTest {
 		int costo = FacturaBusiness.calculoDcobro(tipoVehiculo, fechaIngre, fechaSalida, cilindraje);
 
 		// Assert
-		Assert.assertEquals(7500, costo);
+		assertEquals(7500, costo);
 	}
 
 }

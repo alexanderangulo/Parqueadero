@@ -15,7 +15,7 @@ import com.co.ceiba.parqueadero.repository.IParqueaderoRepository;
 @Service
 public class IngresoBusiness {
 	
-	private final static Logger LOGGER = Logger.getLogger(IngresoBusiness.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(IngresoBusiness.class.getName());
 
 	public static final int CARRO = 1;
 	

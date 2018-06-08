@@ -53,7 +53,7 @@ public class IngresoBusiness {
 		parqueaderorepository.save(parqueadero.get());
 	}
 
-	public String registroCarro(Optional<Parqueadero> parqueadero, Ingreso ingreso) throws Exception {
+	public String registroCarro(Optional<Parqueadero> parqueadero, Ingreso ingreso) throws ExcepcionesParqueadero {
 		if (!parqueadero.isPresent()) {
 			throw new ExcepcionesParqueadero(PARQUEADERO_NO_ENCONTRADO);
 		}
@@ -73,7 +73,7 @@ public class IngresoBusiness {
 		}
 	}
 
-	public String registroMoto(Optional<Parqueadero> parqueadero, Ingreso ingreso) throws Exception {
+	public String registroMoto(Optional<Parqueadero> parqueadero, Ingreso ingreso) throws ExcepcionesParqueadero {
 		if (!parqueadero.isPresent()) {
 			throw new ExcepcionesParqueadero(PARQUEADERO_NO_ENCONTRADO);
 		}

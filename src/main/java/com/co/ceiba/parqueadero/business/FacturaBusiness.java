@@ -12,6 +12,7 @@ import com.co.ceiba.parqueadero.entity.Parqueadero;
 import com.co.ceiba.parqueadero.repository.IFacturaRepository;
 import com.co.ceiba.parqueadero.repository.IIngresoRepository;
 import com.co.ceiba.parqueadero.repository.IParqueaderoRepository;
+import com.co.ceiba.parqueadero.utility.ExcepcionesIngreso;
 import com.co.ceiba.parqueadero.utility.ExcepcionesParqueadero;
 
 @Service
@@ -126,7 +127,7 @@ public class FacturaBusiness {
 		parqueadero = parqueaderorepository.findById((long) 1);
 
 		if (!ingreso.isPresent()) {
-			throw new Exception(PARQUEADERO_NO_ENCONTRADO);
+			throw new ExcepcionesIngreso(PARQUEADERO_NO_ENCONTRADO);
 		}
 		int tipoVehiculo = ingreso.get().getTipoVehiculo();
 		if (tipoVehiculo == CARRO) {
@@ -145,11 +146,11 @@ public class FacturaBusiness {
 		}
 	}
 
-	public Optional<Ingreso> buscarIngresoPorPlaca(String placa) throws Exception {
+	public Optional<Ingreso> buscarIngresoPorPlaca(String placa) throws ExcepcionesIngreso {
 		Optional<Ingreso> ingreso = ingresorepository.findByPlaca(placa);
 
 		if (!ingreso.isPresent()) {
-			throw new Exception(PARQUEADERO_NO_ENCONTRADO);
+			throw new ExcepcionesIngreso(PARQUEADERO_NO_ENCONTRADO);
 		}
 		return ingreso;
 	}
@@ -160,7 +161,7 @@ public class FacturaBusiness {
 		Optional<Ingreso> ingreso = buscarIngresoPorPlaca(placa);
 
 		if (!ingreso.isPresent()) {
-			throw new Exception(PARQUEADERO_NO_ENCONTRADO);
+			throw new ExcepcionesIngreso(PARQUEADERO_NO_ENCONTRADO);
 		}
 		factura.setFechaSalida(Calendar.getInstance());
 

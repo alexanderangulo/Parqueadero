@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import org.junit.Assert.*;
 import org.junit.Test;
 
 import com.co.ceiba.parqueadero.business.FacturaBusiness;

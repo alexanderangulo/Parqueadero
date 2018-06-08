@@ -2,6 +2,8 @@ package com.co.ceiba.parqueadero.business;
 
 import java.util.Calendar;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,8 @@ import com.co.ceiba.parqueadero.repository.IParqueaderoRepository;
 
 @Service
 public class IngresoBusiness {
+	
+	private final static Logger LOGGER = Logger.getLogger(IngresoBusiness.class.getName());
 
 	public static final int CARRO = 1;
 	
@@ -108,7 +112,7 @@ public class IngresoBusiness {
 				return registroMoto(parqueadero, ingreso);
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			LOGGER.log(Level.SEVERE, e.getMessage());
 		}
 		return "error en el registro";
 	}
